@@ -14,14 +14,14 @@ const FindDoctorSearch = () => {
     const handleDoctorSelect = (speciality) => {
         setSearchDoctor(speciality);
         setDoctorResultHidden(true);
-        navigate(`/instant-consultation?speciality=${speciality}`);
+        navigate(`/booking-consultation?speciality=${speciality}`);
         window.location.reload();
     }
 
     return (
         <div className='finddoctor'>
             <center>
-                <h1>Find a doctor and Consult instantly</h1>
+                <h1>Find a doctor and Book an appointment</h1>
                 <div>               
                     <i style={{color:'#000000',fontSize:'20rem'}} className="fa fa-user-md"></i>
                 </div>                
