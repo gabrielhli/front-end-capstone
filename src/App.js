@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Import custom Navbar component
 import Navbar from './Components/Navbar/Navbar';
+import Notification from './Components/Notification/Notification';
 import LandingPage from './Components/Landing_Page/LandingPage';
 import Sign_Up from './Components/Sign_Up/Sign_Up';
 import Login from './Components/Login/Login';
@@ -21,7 +22,7 @@ function App() {
         {/* Set up BrowserRouter for routing */}
         <BrowserRouter>
           {/* Display the Navbar component */}
-          <Navbar/>
+          <Notification>
 
           {/* Set up the Routes for different pages */}
           <Routes>
@@ -30,8 +31,9 @@ function App() {
             <Route path="/Sign_Up" element={<Sign_Up/>}/>
             <Route path="/Login" element={<Login/>}/>
             <Route path="/instant-consultation" element={<InstantConsultation />} />
-            <Route path="/booking-consultation" element={<BookingConsultation/>}/>
+            <Route path="/search/doctors/" element={<BookingConsultation/>}/>
           </Routes>
+          </Notification>
         </BrowserRouter>
     </div>
   );

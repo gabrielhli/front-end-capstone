@@ -22,6 +22,7 @@ const Navbar = () => {
         sessionStorage.removeItem("phone");
         // remove email phone
         localStorage.removeItem("doctorData");
+        localStorage.removeItem("appointmentData");
         setIsLoggedIn(false);
         // setUsername("");
        
@@ -61,7 +62,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li className="link">
-          <Link to="/booking-consultation">Appointments</Link>
+          <Link to="/search/doctors">Appointments</Link>
         </li>
         <li className="link">
           <Link to="/healthblog">Health Blog</Link>
@@ -71,6 +72,9 @@ const Navbar = () => {
         </li>
         {isLoggedIn?(
           <>
+            <li className="link">
+                <Link to="/profile">Welcome {username}</Link>
+            </li>
             <li className="link">
               <button className="btn2" onClick={handleLogout}>
                 Logout
