@@ -1,33 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ReviewForm.css';
-import GiveReviews from './GiveReviews';
-
-const ReviewBtn = () => {
-    return (
-        <button>Click Here</button>
-    );
-};
+import GiveReviews from '../GiveReviews/GiveReviews';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const ReviewForm = () => {
-    //const heading = ["Serial Number","Doctor Name","Doctor Speciality", "Provide Feedback","Review Given"];
+    const ReviewBtn = () => {
+        return (
+            <Popup
+                trigger={
+                    <button>Click Here</button>
+                }
+                modal
+                open={showModal}
+                onClose={() => setShowModal(false)}
+                >
+            <GiveReviews onSubmit={handleFormSubmit}/>
+            </Popup>
+        );
+    };
+
+    const HandleRow = ({ row }, key) => {
+        return (
+            <tr key={key}>
+                <td key="Serial Number">{row["Serial Number"]}</td>
+                <td key="Doctor Name">{row["Doctor Name"]}</td>
+                <td key="Doctor Speciality">{row["Doctor Speciality"]}</td>
+                <td key="Provide Feedback"><ReviewBtn /></td>
+                <td key="Review Given">{row["Review Given"]}</td>
+            </tr>
+        );
+    };
+
+    const [showModal, setShowModal] = useState(false);
+    const [reviews, setReviews] = useState([])
     const data = [
         {
             "Serial Number": "1",
             "Doctor Name": "Dr. John Doe",
             "Doctor Speciality": "Cardiology",
-            "Provide Feedback": <ReviewBtn/>,
+            "Provide Feedback": "",
             "Review Given": ""
             },
         {
             "Serial Number": "2",
             "Doctor Name": "Dr. Jane Smith",
             "Doctor Speciality": "Dermatology",
-            "Provide Feedback": <ReviewBtn/>,
+            "Provide Feedback": "",
             "Review Given": ""
         }
-    ]
-    const heading = Object.keys(data[0]);
+    ];
+    const heading = Object.keys(data[0]);;
 
+    const handleReview = () => {
+        setShowModal(true);
+    };
+
+    const handleFormSubmit = (reviewData) => {
+        const newReview = {
+            ...reviewData
+        };
+        const updatedReview = [...reviews, newReview];
+        setReviews(updatedReview);
+        setShowModal(false);
+    }
 
     return (
         <div className="reviewForm-container">
@@ -44,13 +80,18 @@ const ReviewForm = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((row, index) => (
-                            <tr key={index}>
-                                {heading.map((header) => (
-                                    <td key={header}>{row[header]}</td>
-                                ))}
-                            </tr>
-                        ))}
+                        <tr>
+                            <td>1</td>
+                            <td>Dr John Doe</td>
+                            <td>Cardiology</td>
+                            <td><ReviewBtn /></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Dr Jane Smith</td>
+                            <td>Dermatology</td>
+                            <td><ReviewBtn /></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Function component for giving reviews
-function GiveReviews() {
+const GiveReviews = ({ onSubmit }) => {
   // State variables using useState hook
   const [showForm, setShowForm] = useState(false);
   const [submittedMessage, setSubmittedMessage] = useState('');
@@ -27,6 +27,7 @@ function GiveReviews() {
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    onSubmit(formData);
     setSubmittedMessage(formData);
     setFormData({
       name: '',
@@ -34,7 +35,7 @@ function GiveReviews() {
       rating: 0
     });
     // Check if all required fields are filled before submission
-    if (formData.name && formData.review && formData.rating > 0) {
+    if (formData.name && formData.review && formData.rating >= 0) {
       setShowWarning(false);
     } else {
       setShowWarning(true);
@@ -43,12 +44,6 @@ function GiveReviews() {
 
   return (
     <div>
-      <h2>Form with Message</h2>
-      {!showForm ? (
-        // Display button to open the form
-        <button onClick={handleButtonClick}>Open Form</button>
-      ) : (
-        // Display form for giving feedback
         <form onSubmit={handleSubmit}>
           <h2>Give Your Feedback</h2>
           {/* Display warning message if not all fields are filled */}
@@ -64,14 +59,6 @@ function GiveReviews() {
           {/* Submit button for form submission */}
           <button type="submit">Submit</button>
         </form>
-      )}
-      {/* Display the submitted message if available */}
-      {submittedMessage && (
-        <div>
-          <h3>Submitted Message:</h3>
-          <p>{submittedMessage}</p>
-        </div>
-      )}
     </div>
   );
 }
