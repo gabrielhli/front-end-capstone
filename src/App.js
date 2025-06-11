@@ -12,6 +12,7 @@ import Login from './Components/Login/Login';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import BookingConsultation from './Components/BookingConsultation';
 import ReviewForm from './Components/ReviewForm/ReviewForm'
+import ProfileForm from './Components/ProfileForm/ProfileForm';
 
 // Function component for the main App
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route path="/instant-consultation" element={<InstantConsultation />} />
             <Route path="/search/doctors/" element={<BookingConsultation/>}/>
             <Route path="/reviews" element={<ReviewForm/>}/>
+            <Route path="/profile" element={<ProfileForm/>}/>
           </Routes>
           </Notification>
         </BrowserRouter>
