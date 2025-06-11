@@ -111,7 +111,6 @@ const ReviewForm = () => {
                     </tbody>
                 </table>
             </div>
-
         </div>
     );
 };

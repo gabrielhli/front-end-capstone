@@ -1,0 +1,34 @@
+.reports-container {    
+    width: 400px;
+    margin: auto;
+    margin-top:10%;
+    color: #414146;
+    padding: 0 20px;
+    position: static;
+    width: 100%;
+}
+
+.reports-table {
+    width: 90%;
+}
+
+.reports-headers {
+    background-color: lightgray;
+}
+
+.reports-data {
+    border-top: 1px solid black;
+}
+
+tr {
+    border-top: 1px solid black;
+}
+
+.btn-clicked {
+    background-color: red;
+    cursor: not-allowed;
+}
+
+.btn-clicked:hover {
+    background-color: red;
+}
