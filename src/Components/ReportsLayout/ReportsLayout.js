@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import './ReportsLayout.css';
 
 const ReportsLayout = () => {
@@ -27,10 +28,10 @@ const ReportsLayout = () => {
                 <td key="Doctor Name">{row["Doctor Name"]}</td>
                 <td key="Doctor Speciality">{row["Doctor Speciality"]}</td>
                 <td key="View Report">
-                    <button>View Report</button>
+                    <a href={process.env.PUBLIC_URL + "/patent_report.pdf"}><button>View Report</button></a>
                 </td>
                 <td key="Download Report">
-                    <button>Download Report</button>
+                    <a href={process.env.PUBLIC_URL + "/patent_report.pdf"} download><button>Download Report</button></a>
                 </td>
             </tr>
         );
