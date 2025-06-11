@@ -34,22 +34,22 @@ const ReviewForm = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [reviews, setReviews] = useState([])
-    const data = [
+    const [data, setData] = useState([
         {
             "Serial Number": "1",
             "Doctor Name": "Dr. John Doe",
             "Doctor Speciality": "Cardiology",
-            "Provide Feedback": "",
+            "Provide Feedback": <ReviewBtn />,
             "Review Given": ""
             },
         {
             "Serial Number": "2",
             "Doctor Name": "Dr. Jane Smith",
             "Doctor Speciality": "Dermatology",
-            "Provide Feedback": "",
+            "Provide Feedback": <ReviewBtn />,
             "Review Given": ""
         }
-    ];
+    ])
     const heading = Object.keys(data[0]);;
 
     const handleReview = () => {
@@ -80,18 +80,9 @@ const ReviewForm = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Dr John Doe</td>
-                            <td>Cardiology</td>
-                            <td><ReviewBtn /></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Dr Jane Smith</td>
-                            <td>Dermatology</td>
-                            <td><ReviewBtn /></td>
-                        </tr>
+                        {data.map((row, index) => (
+                            <HandleRow row={row} key={index} />
+                        ))}
                     </tbody>
                 </table>
             </div>
