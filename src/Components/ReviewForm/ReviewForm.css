@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+.review-container {
+    width: 400px;
+}
+
 .reviewForm-table {
     width: 90%;
 }
@@ -22,4 +26,13 @@
 
 tr {
     border-top: 1px solid black;
+}
+
+.btn-clicked {
+    background-color: red;
+    cursor: not-allowed;
+}
+
+.btn-clicked:hover {
+    background-color: red;
 }

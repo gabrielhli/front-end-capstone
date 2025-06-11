@@ -5,7 +5,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 const ReviewForm = () => {
-    const ReviewBtn = () => {
+    const ReviewBtn = ({ serialNumber }) => {
         return (
             <Popup
                 trigger={
@@ -15,19 +15,39 @@ const ReviewForm = () => {
                 open={showModal}
                 onClose={() => setShowModal(false)}
                 >
-            <GiveReviews onSubmit={handleFormSubmit}/>
+            <GiveReviews serialNumber={serialNumber} onSubmit={handleFormSubmit}/>
             </Popup>
         );
     };
 
+    const HandleReview = ({ reviewData }) => {
+        return (
+            <p>
+                {reviewData["name"]} - {reviewData["rating"]}/5: {reviewData["review"]}
+            </p>
+        );
+    };
+
     const HandleRow = ({ row }, key) => {
+        const review = row["Review Given"];
+
         return (
             <tr key={key}>
                 <td key="Serial Number">{row["Serial Number"]}</td>
                 <td key="Doctor Name">{row["Doctor Name"]}</td>
                 <td key="Doctor Speciality">{row["Doctor Speciality"]}</td>
-                <td key="Provide Feedback"><ReviewBtn /></td>
-                <td key="Review Given">{row["Review Given"]}</td>
+                <td key="Provide Feedback">
+                    {review ? (
+                        <button disabled className="btn-clicked">Review Saved</button>
+                    ):(<ReviewBtn serialNumber={row["Serial Number"]}/>)}
+                    
+                </td>
+                <td key="Review Given">
+                    <div className="review-container">
+                    {review && (
+                        <HandleReview reviewData={review}/>)}
+                    </div>
+                </td>
             </tr>
         );
     };
@@ -39,18 +59,19 @@ const ReviewForm = () => {
             "Serial Number": "1",
             "Doctor Name": "Dr. John Doe",
             "Doctor Speciality": "Cardiology",
-            "Provide Feedback": <ReviewBtn />,
+            "Provide Feedback": "",
             "Review Given": ""
             },
         {
             "Serial Number": "2",
             "Doctor Name": "Dr. Jane Smith",
             "Doctor Speciality": "Dermatology",
-            "Provide Feedback": <ReviewBtn />,
+            "Provide Feedback": "",
             "Review Given": ""
         }
     ])
-    const heading = Object.keys(data[0]);;
+    const heading = Object.keys(data[0]);
+    //console.log(data[0]["Review Given"]);
 
     const handleReview = () => {
         setShowModal(true);
@@ -60,9 +81,13 @@ const ReviewForm = () => {
         const newReview = {
             ...reviewData
         };
+        const reviewNumber = Number(Object.keys(reviewData));
+        const serialNumber = (reviewNumber - 1).toString();
         const updatedReview = [...reviews, newReview];
         setReviews(updatedReview);
         setShowModal(false);
+        data[serialNumber]["Review Given"] = reviewData[reviewNumber];
+        //console.log(data[serialNumber]["Review Given"]);
     }
 
     return (

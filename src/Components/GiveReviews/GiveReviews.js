@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Function component for giving reviews
-const GiveReviews = ({ onSubmit }) => {
+const GiveReviews = ({ serialNumber, onSubmit }) => {
   // State variables using useState hook
   const [showForm, setShowForm] = useState(false);
   const [submittedMessage, setSubmittedMessage] = useState('');
@@ -26,8 +26,10 @@ const GiveReviews = ({ onSubmit }) => {
 
   // Function to handle form submission
   const handleSubmit = (e) => {
+    const newData = {};
     e.preventDefault();
-    onSubmit(formData);
+    newData[serialNumber] = formData;
+    onSubmit(newData);
     setSubmittedMessage(formData);
     setFormData({
       name: '',
@@ -51,6 +53,17 @@ const GiveReviews = ({ onSubmit }) => {
           <div>
             <label htmlFor="name">Name:</label>
             <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="rating">Rating:</label>
+            <select id="rating" name="rating" value={formData.rating} onChange={handleChange}>
+                <option value="0">0 stars</option>
+                <option value="1">1 stars</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+                <option value="5">5 stars</option>
+            </select>
           </div>
           <div>
             <label htmlFor="review">Review:</label>
