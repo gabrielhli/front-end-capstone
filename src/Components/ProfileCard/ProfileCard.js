@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import './ProfileCard.css';
 
 const ProfileCard = ({ profileName }) => {
@@ -13,7 +14,8 @@ const ProfileCard = ({ profileName }) => {
         <button className="profile-card-btn" onClick={handleOpen}>Welcome, {profileName}</button>
         {open ? (
             <div className="profile-card-container">
-                    <p>Your Profile</p>
+                    <p><Link to="/profile">Your Profile</Link></p>
+                    <p><Link to="/reports">Your Reports</Link></p>
             </div>
         ) : null}
         </div>
