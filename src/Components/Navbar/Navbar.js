@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import ProfileCard from "../ProfileCard/ProfileCard";
 import "./Navbar.css";
 
 
@@ -44,7 +44,8 @@ const Navbar = () => {
 
       if (storedemail) {
             setIsLoggedIn(true);
-            setUsername(storedemail);
+            const newUsername = storedemail.substring(0, storedemail.indexOf("@"));
+            setUsername(newUsername);
           }
         }, []);
   return (
@@ -73,7 +74,7 @@ const Navbar = () => {
         {isLoggedIn?(
           <>
             <li className="link">
-                <Link to="/profile">Welcome {username}</Link>
+                <ProfileCard profileName={username} />
             </li>
             <li className="link">
               <button className="btn2" onClick={handleLogout}>
